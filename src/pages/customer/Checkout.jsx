@@ -90,7 +90,15 @@ const Checkout = () => {
       const razorpayResponse = await createPaymentOrder(order._id);
 
       const razorpayData = razorpayResponse.data;
+      console.log("razorpayResponse", razorpayResponse);
+      console.log("razorpayData", razorpayData);
 
+      console.log("Razorpay Options", {
+        key: razorpayData.key,
+        amount: razorpayData.amount,
+        currency: razorpayData.currency,
+        order_id: razorpayData.orderId,
+      });
       const options = {
         key: razorpayData.key,
         amount: razorpayData.amount,
