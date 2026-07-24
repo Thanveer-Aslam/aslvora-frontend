@@ -4,6 +4,7 @@ import { ShoppingCart, ChevronRight } from "lucide-react";
 
 import { getProductById } from "../../services/product.service";
 import useCart from "../../hooks/useCart";
+import { toast } from "sonner";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -70,11 +71,13 @@ const ProductDetails = () => {
          quantity,
        });
 
-       alert("Product added to cart successfully!");
+       toast.success("Product added to cart successfully!");
      } catch (error) {
-       alert(error.response?.data?.message || "Failed to add product to cart.");
+       toast.error(
+         error.response?.data?.message || "Failed to add product to cart.",
+       );
      }
-   }; 
+   };
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10">

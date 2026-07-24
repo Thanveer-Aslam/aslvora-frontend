@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import { CloudUpload, Delete } from "@mui/icons-material";
+import { toast } from "sonner";
 
 const MAX_IMAGES = 5;
 
@@ -19,7 +20,7 @@ const ImageUpload = ({
       existingImages.length + newImages.length + selectedFiles.length;
 
     if (totalImages > MAX_IMAGES) {
-      alert(`Maximum ${MAX_IMAGES} images allowed.`);
+      toast.warning(`Maximum ${MAX_IMAGES} images allowed.`);
       return;
     }
 

@@ -13,6 +13,7 @@ import CheckoutSummary from "../../components/checkout/CheckoutSummary";
 import PlaceOrderButton from "../../components/checkout/PlaceOrderButton";
 
 import Loader from "../../components/common/Loader";
+import { toast } from "sonner";
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const Checkout = () => {
 
   const handlePlaceOrder = async () => {
     if (!selectedAddress) {
-      alert("Please select a delivery address.");
+      altoast.warning("Please select a delivery address.");
       return;
     }
 
@@ -115,7 +116,7 @@ const Checkout = () => {
             });
           } catch (error) {
             console.error(error);
-            alert("Payment verification failed.");
+            toast.error("Payment verification failed.");
           }
         },
 
@@ -139,7 +140,7 @@ const Checkout = () => {
       razorpay.open();
     } catch (error) {
       console.error(error);
-      alert(error.response?.data?.message || "Something went wrong.");
+      toast.error(error.response?.data?.message || "Something went wrong.");
     }
   };
 

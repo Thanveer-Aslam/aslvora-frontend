@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useAuth from "../../hooks/useAuth";
+import { toast } from "sonner";
 
 const registerSchema = z
   .object({
@@ -56,7 +57,7 @@ const RegisterForm = () => {
         navigate("/", { replace: true });
       }
     } catch (error) {
-      alert(error.response?.data?.message || "Registration failed");
+      toast.error(error.response?.data?.message || "Registration failed");
     }
   };
 
