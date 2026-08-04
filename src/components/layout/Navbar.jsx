@@ -32,7 +32,7 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const { logout, user } = useAuth();
+  const { logout, user, isAuthenticated } = useAuth();
   const { cart } = useCart();
   const { count: wishlistCount } = useWishlist();
   useEffect(() => {
@@ -112,29 +112,54 @@ const Navbar = () => {
 
               {profileOpen && (
                 <div className="absolute right-0 mt-3 w-52 rounded-xl border bg-white shadow-xl">
-                  <div className="border-b p-4">
-                    <p className="font-semibold">{user?.fullName}</p>
+                  {isAuthenticated ? (
+                    <>
+                      <div className="border-b p-4">
+                        <p className="font-semibold">{user?.fullName}</p>
+                        <p className="text-xs text-gray-500">{user?.email}</p>
+                      </div>
 
-                    <p className="text-xs text-gray-500">{user?.email}</p>
-                  </div>
+                      <button
+                        onClick={() => {
+                          navigate("/profile");
+                          setProfileOpen(false);
+                        }}
+                        className="w-full px-4 py-3 text-left hover:bg-gray-100"
+                      >
+                        My Profile
+                      </button>
 
-                  <button
-                    onClick={() => {
-                      navigate("/profile");
-                      setProfileOpen(false);
-                    }}
-                    className="w-full px-4 py-3 text-left hover:bg-gray-100"
-                  >
-                    My Profile
-                  </button>
+                      <button
+                        onClick={handleLogout}
+                        className="flex w-full items-center gap-2 px-4 py-3 text-left text-red-600 hover:bg-red-50"
+                      >
+                        <LogOut size={18} />
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => {
+                          navigate("/auth");
+                          setProfileOpen(false);
+                        }}
+                        className="w-full px-4 py-3 text-left hover:bg-gray-100"
+                      >
+                        Login
+                      </button>
 
-                  <button
-                    onClick={handleLogout}
-                    className="flex w-full items-center gap-2 px-4 py-3 text-left text-red-600 hover:bg-red-50"
-                  >
-                    <LogOut size={18} />
-                    Logout
-                  </button>
+                      <button
+                        onClick={() => {
+                          navigate("/auth");
+                          setProfileOpen(false);
+                        }}
+                        className="w-full px-4 py-3 text-left hover:bg-gray-100"
+                      >
+                        Register
+                      </button>
+                    </>
+                  )}
                 </div>
               )}
             </div>
